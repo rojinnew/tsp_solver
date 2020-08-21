@@ -1,10 +1,10 @@
-===========================================================
-
 The program solves the TSP instance that is symmetric and satisfies triangular inequality  
 
-Author: Rojin Aliehyaei
+!<Image>(https://github.com/rojinnew/tsp_solver/blob/master/image.png)
 
-Requirements: python2.7, numpy-1.15.4, networkx-2.2
+**Requirements**
+
+Python2.7, NumPy-1.15.4, networkx-2.2
 
 **Details**
 
@@ -13,8 +13,6 @@ Requirements: python2.7, numpy-1.15.4, networkx-2.2
 - In utils for calculating the distance, fix method from numpy-1.15.4 is used. 
 
 - In Christofides method, max_weight_matching function from networkx-2.2 is used.
-
-===========================================================
 
 #### Overall Structure of code directory
 
@@ -133,5 +131,4 @@ exec -inst <filename> -alg [BnB | Approx | CI | Christofides | LS1 | LS2] -time 
 -To run the simulated annealing algorithm type the following command:
 
     ./exec -inst Berlin.tsp -alg LS1 -time 60 -seed 1
-
 
