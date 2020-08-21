@@ -3,7 +3,7 @@
 This study evaluates six algorithms for solving metric version of Traveling Salesperson Problem. First, an exact algorithm based on branch-and-bound (BnB) strategy is implemented and evaluated.  Since the exact algorithm is computationally expensive, we also implement three constructive heuristic methods based on Minimum Spanning Tree, Cheapest Insertion, and Christofides. Finally, we implement two algorithms based on stochastic local search strategy including Simulated Annealing and Iterative Local Search. The paper also provides the theoretical and empirical analyses on runtime, solution quality, and relative error of each algorithm. Thes number of nodes in graph is in range of 10 to 250.
 
 <p align = "center">
-	![Image](https://github.com/rojinnew/tsp_solver/blob/master/image.png)
+	<img src = "https://github.com/rojinnew/tsp_solver/blob/master/image.png">
 </p>
 
 **Requirements**
