@@ -1,6 +1,6 @@
 The program solves the TSP instance that is symmetric and satisfies triangular inequality  
 
-<!Image>(https://github.com/rojinnew/tsp_solver/blob/master/image.png)
+![Image](https://github.com/rojinnew/tsp_solver/blob/master/image.png)
 
 **Requirements**
 
