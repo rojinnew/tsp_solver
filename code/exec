@@ -1,0 +1,80 @@
+#!/usr/bin/env python2.7
+'''===================================================
+*author: Rojin Aliehyaei
+*description: main method for calling different TSP solver Algorithm
+*Georgia Institute of Technology, Fall 2018
+====================================================='''
+import sys,time
+import argparse 
+from utils import write_to_file
+from MSTApprox import mstapprox
+from Christofides import christofides 
+from bnb import bnb
+from simAnnealing import sa
+from two_opt import two_opt
+from cheapest_insertion import ci 
+
+'''===================================================
+main method parse the input entered by the user     
+It invokesi the algorithm and pass the patameters 
+algorithms supported: [BnB | Approx | LS1 | LS2] 
+BnB: branch-and-bound
+Approx: MST approximation
+LS1:  Simulated Annealing
+LS2:  Iterated Local Search based on 2-opt 
+====================================================='''
+def main(argv):
+    parser = argparse.ArgumentParser()
+    msg = "please make sure you put all required argumnents in command line as it is shown below:\n";
+    cmd = "exec -inst <filename> , -alg [BnB | Approx | LS1 | LS2], -time <cutoff_in_seconds>, -seed <random_seed>"; 
+    parser.add_argument("-inst", type = str, default = "Cincinnati.tsp", help="file name in data folder")
+    parser.add_argument("-alg", type = str, default = "MSTApprox", help="choos the name of algorithm")
+    parser.add_argument("-time", type = int, default = 600, help="set the cut-off time")
+    parser.add_argument("-seed", type = int, default = 10, help="set the random seed")
+    args = parser.parse_args()
+    file_name = args.inst
+    algorithm = args.alg
+    cut_time = args.time
+    random_seed = args.seed
+    print("file name", file_name) 
+    print("alg",algorithm) 
+    print("cut-off time",cut_time) 
+    print("random seed",random_seed) 
+    if(algorithm == "Approx"):
+        start_time = time.time()
+        total_time, v_visited, tour_cost = mstapprox(file_name,cut_time, random_seed, start_time)
+        print("tour cost", tour_cost)
+        if(total_time < cut_time):
+            v_visited = [ c+1 for c in v_visited]
+            timestamp_cost = [(total_time,tour_cost)]
+            write_to_file(v_visited, tour_cost, timestamp_cost, file_name, algorithm, cut_time,random_seed)        
+        else:
+            print("the algorithm does not have enough time to generate a solution")
+
+    elif(algorithm == "BnB"):
+        print("BnB with 2 shortest edges")
+        start_time = time.time()
+        bnb(file_name,cut_time, random_seed, start_time)    
+    elif(algorithm == "LS1"):
+        start_time = time.time()
+        sa(file_name,cut_time, random_seed, start_time)    
+    elif(algorithm == "LS2"):
+        start_time = time.time()
+        two_opt(file_name,cut_time, random_seed, start_time)    
+    elif(algorithm == "CI"):
+        start_time = time.time()
+        ci(file_name,cut_time, random_seed, start_time)    
+    elif(algorithm == "Christofides"):
+        #print("yyy")
+        start_time = time.time()
+        total_time, v_visited, tour_cost = christofides(file_name,cut_time, random_seed, start_time)
+        print("tour cost", tour_cost)
+        if(total_time < cut_time):
+            v_visited = [ c+1 for c in v_visited]
+            timestamp_cost = [(total_time,tour_cost)]
+            write_to_file(v_visited, tour_cost, timestamp_cost, file_name, algorithm, cut_time,random_seed)        
+        else:
+            print("the algorithm does not have enough time to generate a solution")
+
+if __name__ == "__main__":
+   main(sys.argv[1:])
