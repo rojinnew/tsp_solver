@@ -6,7 +6,7 @@ This study evaluates six algorithms for solving metric version of Traveling Sale
 
 ![Image](https://github.com/rojinnew/tsp_solver/blob/master/image.png)
 
-< /p>
+</p>
 
 **Requirements**
 
